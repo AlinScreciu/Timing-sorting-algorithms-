@@ -140,11 +140,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleApplication1.cpp" />
-    <ClCompile Include="sorts.cpp" />
+    <ClCompile Include="src\ConsoleApplication1.cpp" />
+    <ClCompile Include="src\sorts.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sorts.h" />
+    <ClInclude Include="src\sorts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
