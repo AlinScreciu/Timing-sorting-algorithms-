@@ -35,33 +35,34 @@ void pos_copy_arr(int source[], int dest[], int size)
 }
 void write_to_file(int size, string name, int arr[])
 {
+    ofstream fp("times.csv", std::ios::app);
     double time;
-    int* copy = new int[size];
+    int* copy = new int[size+1];
     copy_arr(arr, copy, size);
     time = time_sort_hi_low(merge_sort, copy, 0, size - 1) / 1000000000;
-    cout << fixed << "Merge Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Merge Sort," << name << " sorted," << size << "," << time << "," << endl;
     copy_arr(arr, copy, size);
     time = time_sort_hi_low(quick_sort, copy, 0, size - 1) / 1000000000;
-    cout << fixed << "Quick Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Quick Sort," << name << " sorted," << size << "," << time << "," << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(bubble_sort, copy, size) / 1000000000;
-    cout << fixed << "Bubble Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Bubble Sort," << name << " sorted," << size << "," << time << "," << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(insertion_sort, copy, size) / 1000000000;
-    cout << fixed << "Insertion Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Insertion Sort," << name << " sorted," << size << "," << time << "," << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(selection_sort, copy, size) / 1000000000;
-    cout << fixed << "Selection Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Selection Sort," << name << " sorted," << size << "," << time << "," << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(heap_sort, copy, size) / 1000000000;
-    cout << fixed << "Heap Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Heap Sort," << name << " sorted," << size << "," << time << "," << endl;
+    /*pos_copy_arr(arr, copy, size);
+    time = time_sort_size(count_sort, copy, size) / 1000000000;
+    fp << fixed << "Counting Sort," << name << " sorted," << size << "," << time << "," << endl;*/
     pos_copy_arr(arr, copy, size);
-    time = time_sort_size(count_sort, copy, size-1) / 1000000000;
-    cout << fixed << "Counting Sort," << name << " sorted," << size << "," << time << "," << endl;
-    pos_copy_arr(arr, copy, size);
-    time = time_sort_size(radix_sort, copy, size-1) / 1000000000;
-    cout << fixed << "Radix Sort," << name << " sorted," << size << "," << time << "," << endl;
-
+    time = time_sort_size(radix_sort, copy, size) / 1000000000;
+    fp << fixed << "Radix Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp.close();
     delete[] copy;
 }
 double time_sort_hi_low(void (*f)(int ar[], int l, int h),int arr[], int low, int high) 
@@ -104,7 +105,7 @@ int partition(int arr[], int l, int h)
 }
 void quick_sort(int arr[], int l, int h)
 {
-    int* stack = new int[h - l + 1];
+    int* stack = new int[h - l + 2];
     int top = -1;
 
     stack[++top] = l;
@@ -159,8 +160,8 @@ void merge(int arr[], int l, int m, int r)
     int n1 = m - l + 1;
     int n2 = r - m;
 
-    int* L = new int[n1];
-    int* R = new int[n2];
+    int* L = new int[n1+1];
+    int* R = new int[n2+1];
 
     for (int i = 0; i < n1; i++)
         L[i] = arr[l + i];
@@ -272,8 +273,8 @@ int get_max(int arr[], int n)
 void _count_sort(int array[], int size , int place)
 {
     int max = get_max(array, size);
-    int* output = new int[size];
-    int* count = new int[max];
+    int* output = new int[size+1];
+    int* count = new int[max+1];
 
     for (int i = 0; i < max; ++i)
         count[i] = 0;
@@ -303,36 +304,34 @@ void radix_sort(int arr[], int n)
     for (int exp = 1; m / exp > 0; exp *= 10)
         _count_sort(arr, n, exp);
 }
-void count_sort(int array[], int size) 
+void count_sort(int arr[], int size)
 {
-    int max = get_max(array,size);
-    
-    int* output = new int[max + 1];
+    int max = get_max(arr, size);
     int* count = new int[max + 1];
-    
-
-    for (int i = 0; i <= max; ++i) {
+    int* output = new int[max + 1];
+    for(int i = 0 ; i < max+1; i++)
+    {
         count[i] = 0;
+        output[i] = 0;
     }
-
-    for (int i = 0; i < size; i++) {
-        count[array[i]]++;
+    for(int i = 0 ; i < size; i++)
+    {
+        count[arr[i]] += 1;
     }
-
-    for (int i = 1; i <= max; i++) {
+    for(int i = 1 ; i < max+1; i++)
+    {
         count[i] += count[i - 1];
     }
-
-    for (int i = size - 1; i >= 0; i--) {
-        output[count[array[i]] - 1] = array[i];
-        count[array[i]]--;
+    for(int i =  size-1;i>=0;i--) 
+    {
+        output[count[arr[i]]] = arr[i];
+        count[arr[i]] -= 1;
     }
-
-
-    for (int i = 0; i < size; i++) {
-        array[i] = output[i];
+    for(int i = 0 ; i < size ; i ++) 
+    {
+        arr[i] = output[i];
     }
-    delete[] output, count;
+    delete[] count, output;
 }
 void selection_sort(int array[], int size) 
 {

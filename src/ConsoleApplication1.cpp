@@ -3,7 +3,10 @@ using namespace std;
 
 int main()
 {	
-		for (int i = 0; i < 5; i++)
+		fstream fp("times.csv", std::ios::out);
+		fp << "sort name,data type,size,time,\n";
+		fp.close();
+		for (int i = 0; i < 50; i++)
 		{
 			int a, b, size;
 			string name;
