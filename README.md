@@ -1,4 +1,4 @@
-# Timing-sorting-algorithms-
+# Timing-sorting-algorithms
 # IMPORTANT:<br>The program times the algorithms on arrays with up to 1 million elements, as such the time for the final result is about 2 hours, this depends on your machine.
 
 ## A simple C++ 14 progam that times sorting algorithms on different types on data.<br>The dataset was generated using a python script, located in the /dataset folder.
