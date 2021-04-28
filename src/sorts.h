@@ -23,6 +23,5 @@ void merge_sort(int arr[], int l, int r); // hi low
 void insertion_sort(int arr[], int n); // size
 void heap_sort(int arr[], int n); // size
 void radix_sort(int arr[], int n); // size
-void count_sort(int array[], int size); // size
 void selection_sort(int array[], int size); // size
 

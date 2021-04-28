@@ -56,9 +56,6 @@ void write_to_file(int size, string name, int arr[])
     copy_arr(arr, copy, size);
     time = time_sort_size(heap_sort, copy, size) / 1000000000;
     fp << fixed << "Heap Sort," << name << " sorted," << size << "," << time << "," << endl;
-    /*pos_copy_arr(arr, copy, size);
-    time = time_sort_size(count_sort, copy, size) / 1000000000;
-    fp << fixed << "Counting Sort," << name << " sorted," << size << "," << time << "," << endl;*/
     pos_copy_arr(arr, copy, size);
     time = time_sort_size(radix_sort, copy, size) / 1000000000;
     fp << fixed << "Radix Sort," << name << " sorted," << size << "," << time << "," << endl;
@@ -304,35 +301,7 @@ void radix_sort(int arr[], int n)
     for (int exp = 1; m / exp > 0; exp *= 10)
         _count_sort(arr, n, exp);
 }
-void count_sort(int arr[], int size)
-{
-    int max = get_max(arr, size);
-    int* count = new int[max + 1];
-    int* output = new int[max + 1];
-    for(int i = 0 ; i < max+1; i++)
-    {
-        count[i] = 0;
-        output[i] = 0;
-    }
-    for(int i = 0 ; i < size; i++)
-    {
-        count[arr[i]] += 1;
-    }
-    for(int i = 1 ; i < max+1; i++)
-    {
-        count[i] += count[i - 1];
-    }
-    for(int i =  size-1;i>=0;i--) 
-    {
-        output[count[arr[i]]] = arr[i];
-        count[arr[i]] -= 1;
-    }
-    for(int i = 0 ; i < size ; i ++) 
-    {
-        arr[i] = output[i];
-    }
-    delete[] count, output;
-}
+
 void selection_sort(int array[], int size) 
 {
     for (int step = 0; step < size - 1; step++) 
