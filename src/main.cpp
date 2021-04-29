@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {		
 		fstream fp("times.csv", std::ios::out);   //
-		fp << "sort name,data type,size,time,\n"; // Write the headers of the csv
+		fp << "sort name,data type,size,time\n"; // Write the headers of the csv
 		fp.close();			          //
 		for (int i = 0; i < 50; i++)	          // Iterate over the strings in the dataset array
 		{
