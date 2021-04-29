@@ -45,25 +45,25 @@ void write_to_file(int size, string name, int arr[])
     int* copy = new int[size+1];
     copy_arr(arr, copy, size);  // Copy the original array into a copy, so the original data can be sorted multiple times
     time = time_sort_hi_low(merge_sort, copy, 0, size - 1) / 1000000000; // Its divided by 1 billion as the time returned is in nanoseconds
-    fp << fixed << "Merge Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Merge Sort," << name << " sorted," << size << "," << time << endl;
     copy_arr(arr, copy, size);
     time = time_sort_hi_low(quick_sort, copy, 0, size - 1) / 1000000000;
-    fp << fixed << "Quick Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Quick Sort," << name << " sorted," << size << "," << time << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(bubble_sort, copy, size) / 1000000000;
-    fp << fixed << "Bubble Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Bubble Sort," << name << " sorted," << size << "," << time << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(insertion_sort, copy, size) / 1000000000;
-    fp << fixed << "Insertion Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Insertion Sort," << name << " sorted," << size << "," << time << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(selection_sort, copy, size) / 1000000000;
-    fp << fixed << "Selection Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Selection Sort," << name << " sorted," << size << "," << time << endl;
     copy_arr(arr, copy, size);
     time = time_sort_size(heap_sort, copy, size) / 1000000000;
-    fp << fixed << "Heap Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Heap Sort," << name << " sorted," << size << "," << time << endl;
     pos_copy_arr(arr, copy, size);
     time = time_sort_size(radix_sort, copy, size) / 1000000000;
-    fp << fixed << "Radix Sort," << name << " sorted," << size << "," << time << "," << endl;
+    fp << fixed << "Radix Sort," << name << " sorted," << size << "," << time << endl;
     fp.close();   // Close the file
     delete[] copy; // Memory management
 }
